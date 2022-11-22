@@ -29,22 +29,18 @@
         </nav>
 
         <!-- Section-->
-
-        <form th:action="@{/logincheck}" method="POST" align="center">
+        <form th:action="@{/registro}" method="POST" align="center">
             <div class="form-group my-3">
-                <p>Acceso administrador</p>
+                <p>Registrar administrador</p>
             </div>
             <div align="center" class="form-group my-3">
-                <input type="password" class="form-control" placeholder="Nombre de Usuario" name="nombreu" style="width: 60%; margin-left: 10px">
+                <input type="text" class="form-control" placeholder="Nombre de Usuario" name="nombreu" style="width: 60%; margin-left: 10px">
             </div>
             <div align="center" class="form-group my-3">
                 <input type="password" class="form-control" placeholder="Contraseña" name="password" style="width: 60%; margin-left: 10px">
             </div>
-            <button type="submit" class="btn btn-dark" style="width: 60%; margin-left: 10px">Entrar</button>
+            <button type="submit" class="btn btn-dark" style="width: 60%; margin-left: 10px">Registrar</button>
         </form>
-        <a href="login.html"></a>
-        <br>
-
         <!-- Footer-->
         <footer class="py-5 bg-dark" style="position:fixed;width:100%;bottom:0">
             <div class="container"><p class="m-0 text-center text-white">

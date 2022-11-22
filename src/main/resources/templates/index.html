@@ -25,7 +25,16 @@
 
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container px-1 px-lg-5">
-                <a class="navbar-brand" href="/"><img src="/images/pizarrasLogo.png" style="width: 200px"></a>
+                <span sec:authorize="isAnonymous()">
+                    <a th:href="@{/}">
+                        <img src="/images/pizarrasLogo.png" style="width: 200px">
+                    </a>
+                </span>
+                <span sec:authorize="hasAnyRole('ADMIN')">
+                    <a th:href="@{/admin/dashboard}">
+                        <img src="/images/pizarrasLogo.png" style="width: 200px">
+                    </a>
+                </span>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
@@ -42,8 +51,19 @@
                                 <li><a class="dropdown-item" href="#!">Pizarras Maceteras</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/login">Acceso Admin</a></li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/admin/añadir">Añadir Publicación</a></li>
+                        <span sec:authorize="isAnonymous()"> 
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="/login">Acceso Admin</a></li>
+                        </span>
+                        <span sec:authorize="isAnonymous()"> 
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="/registrar">Registro Admin</a></li>
+                        </span>
+                        <span sec:authorize="hasAnyRole('ADMIN')">
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="/admin/añadir">Añadir Publicación</a></li>
+                        </span>
+                        <span sec:authorize="hasAnyRole('ADMIN')">
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="/logout">Logout</a></li>
+                        </span>
+
                     </ul> 
                     <div class="redes">
                         <a href="https://www.facebook.com/pizarrascomerciales" class="facebook"><i class="fa fa-facebook"></i></a>
@@ -85,11 +105,6 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-            <!--            <div class="container px-4 px-lg-5">
-                            <div class="text-center text-white-50">
-                                <p class="lead p-2 m-0">Fabricamos y distribuimos para negocios y escuelas desde San Francisco Solano</p>
-                            </div>
-                        </div>-->
         </header>
 
 

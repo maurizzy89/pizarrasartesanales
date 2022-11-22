@@ -60,12 +60,17 @@ public class PortalControlador {
         return "login.html";
     }
 
-//    @PostMapping("/registro")
-//    public String registro(@RequestParam(name = "nombreu") String nombreu, @RequestParam(name = "password") String password) throws MyException, IOException {
-//            administradorServicio.guardarUsuario(nombreu, password);
-//            return "publicaciones.html";
-//        }
-//
+    @GetMapping("/registrar")
+    public String registrar() {
+        return "signIn";
+    }
+
+    @PostMapping("/registro")
+    public String registro(@RequestParam(name = "nombreu") String nombreu, @RequestParam(name = "password") String password, @RequestParam(name = "password2") String password2) throws MyException, IOException {
+        administradorServicio.guardarUsuario(nombreu, password);
+        return "index.html";
+    }
+
     @GetMapping("/publicaciones")
     public String listar(ModelMap modelo) {
         List<Publicacion> ultimasPublicaciones = publicacionServicio.listarPublicaciones();
