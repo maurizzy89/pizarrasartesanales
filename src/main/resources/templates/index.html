@@ -54,9 +54,9 @@
                         <span sec:authorize="isAnonymous()"> 
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="/login">Acceso Admin</a></li>
                         </span>
-<!--                        <span sec:authorize="isAnonymous()"> 
-                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="/registrar">Registro Admin</a></li>
-                        </span>-->
+                        <!--                        <span sec:authorize="isAnonymous()"> 
+                                                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/registrar">Registro Admin</a></li>
+                                                </span>-->
                         <span sec:authorize="hasAnyRole('ADMIN')">
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="/admin/añadir">Añadir Publicación</a></li>
                         </span>
@@ -126,9 +126,10 @@
                                 </div>
                             </div>
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-dark mt-1" th:href="@{/admin/editar/__${publicacion.id}__}">Editar</a></div>
-                                <div class="text-center"><a class="btn btn-danger mt-1" th:href="@{/admin/eliminar/__${publicacion.id}__}">Eliminar</a></div>
-
+                                <span sec:authorize="hasAnyRole('ADMIN')">
+                                    <div class="text-center"><a class="btn btn-dark mt-1" th:href="@{/admin/editar/__${publicacion.id}__}">Editar</a></div>
+                                    <div class="text-center"><a class="btn btn-danger mt-1" th:href="@{/admin/eliminar/__${publicacion.id}__}">Eliminar</a></div>
+                                </span>
                             </div>
                         </div>
                     </div>
