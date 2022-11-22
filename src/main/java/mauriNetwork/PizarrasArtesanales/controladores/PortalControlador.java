@@ -66,7 +66,7 @@ public class PortalControlador {
     }
 
     @PostMapping("/registro")
-    public String registro(@RequestParam(name = "nombreu") String nombreu, @RequestParam(name = "password") String password, @RequestParam(name = "password2") String password2) throws MyException, IOException {
+    public String registro(@RequestParam(name = "nombreu") String nombreu, @RequestParam(name = "password") String password) throws MyException, IOException {
         administradorServicio.guardarUsuario(nombreu, password);
         return "index.html";
     }
