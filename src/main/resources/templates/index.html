@@ -54,9 +54,9 @@
                         <span sec:authorize="isAnonymous()"> 
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="/login">Acceso Admin</a></li>
                         </span>
-                        <span sec:authorize="isAnonymous()"> 
+<!--                        <span sec:authorize="isAnonymous()"> 
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="/registrar">Registro Admin</a></li>
-                        </span>
+                        </span>-->
                         <span sec:authorize="hasAnyRole('ADMIN')">
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="/admin/agregar">Agregar Publicación</a></li>
                         </span>
