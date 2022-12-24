@@ -1,4 +1,4 @@
-package mauriNetwork.headbangersCave.excepciones;
+package mauriNetwork.PizarrasArtesanales.excepciones;
 
 public class MyException extends Exception {
 

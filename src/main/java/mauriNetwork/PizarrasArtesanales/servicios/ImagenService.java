@@ -13,6 +13,8 @@ public class ImagenService {
 
     @Autowired
     ImagenRepositorio imagenRepositorio;
+    @Autowired
+    PizarraServicio pizarraServicio;
 
     public void save(Imagen imagen) {
         imagenRepositorio.save(imagen);
@@ -46,4 +48,7 @@ public class ImagenService {
 //        }
 //        return urlNueva;
 //    }
+    public void modificarPortada(Long id) {
+
+    }
 }

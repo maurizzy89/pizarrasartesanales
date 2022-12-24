@@ -1,14 +1,13 @@
 package mauriNetwork.PizarrasArtesanales.servicios;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import mauriNetwork.PizarrasArtesanales.entidades.Administrador;
 import mauriNetwork.PizarrasArtesanales.enumeraciones.Rol;
+import mauriNetwork.PizarrasArtesanales.excepciones.MyException;
 import mauriNetwork.PizarrasArtesanales.repositorio.AdministradorRepositorio;
-import mauriNetwork.headbangersCave.excepciones.MyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -27,7 +26,7 @@ public class AdministradorServicio implements UserDetailsService {
     @Autowired
     public AdministradorRepositorio administradorRepositorio;
     @Autowired
-    public PublicacionServicio publicacionServicio;
+    public PizarraServicio pizarraServicio;
 
     //hacer un metodo para modificar contraseña
 //    @Transactional
@@ -40,6 +39,7 @@ public class AdministradorServicio implements UserDetailsService {
 //            administradorRepositorio.save(administrador);
 //        }
 //    }
+    
     @Override
     public UserDetails loadUserByUsername(String nombreu) throws UsernameNotFoundException {
         Administrador administrador = administradorRepositorio.buscarPorUsuario(nombreu);
@@ -62,7 +62,6 @@ public class AdministradorServicio implements UserDetailsService {
     }
 
     public Administrador registrar(String nombreu, String password) throws MyException {
-
         Administrador administrador = new Administrador();
         administrador.setNombreu(nombreu);
         administrador.setPassword(new BCryptPasswordEncoder().encode(password));

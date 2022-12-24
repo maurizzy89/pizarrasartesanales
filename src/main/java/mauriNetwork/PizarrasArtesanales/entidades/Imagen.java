@@ -9,35 +9,29 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "imagen")
 public class Imagen {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String imagenUrl;
     private String imagenId;
+    private boolean portada;
 
     public Imagen() {
     }
 
-    public Imagen(String name, String imagenUrl, String imagenId) {
+    public Imagen(String name, String imagenUrl, String imagenId, boolean portada) {
         this.name = name;
         this.imagenUrl = imagenUrl;
         this.imagenId = imagenId;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.portada = portada;
     }
 
     public String getName() {
         return name;
     }
-
+    
     public void setName(String name) {
         this.name = name;
     }
@@ -57,6 +51,13 @@ public class Imagen {
     public void setImagenId(String imagenId) {
         this.imagenId = imagenId;
     }
-    
-    
+
+    public boolean isPortada() {
+        return portada;
+    }
+
+    public void setPortada(boolean portada) {
+        this.portada = portada;
+    }
+
 }

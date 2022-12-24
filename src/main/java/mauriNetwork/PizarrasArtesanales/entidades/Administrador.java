@@ -33,6 +33,6 @@ public class Administrador {
     private Rol rol;
 
     @OneToMany
-    private List<Publicacion> publicacionesAdministrador;
+    private List<Pizarra> publicacionesAdministrador;
 
 }

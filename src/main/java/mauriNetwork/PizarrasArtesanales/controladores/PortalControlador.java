@@ -1,22 +1,12 @@
 package mauriNetwork.PizarrasArtesanales.controladores;
 
-import java.awt.image.BufferedImage;
-
-import mauriNetwork.headbangersCave.excepciones.MyException;
-
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.util.List;
-import java.util.Map;
-import javax.imageio.ImageIO;
-import javax.servlet.http.HttpSession;
-import mauriNetwork.PizarrasArtesanales.entidades.Administrador;
-import mauriNetwork.PizarrasArtesanales.entidades.Imagen;
-import mauriNetwork.PizarrasArtesanales.entidades.Publicacion;
+import mauriNetwork.PizarrasArtesanales.entidades.Pizarra;
+import mauriNetwork.PizarrasArtesanales.excepciones.MyException;
 import mauriNetwork.PizarrasArtesanales.servicios.AdministradorServicio;
 import mauriNetwork.PizarrasArtesanales.servicios.ImagenService;
-import mauriNetwork.PizarrasArtesanales.servicios.PublicacionServicio;
+import mauriNetwork.PizarrasArtesanales.servicios.PizarraServicio;
 import mauriNetwork.PizarrasArtesanales.servicios.CloudinaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 //
 
 @Controller
@@ -35,7 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class PortalControlador {
 
     @Autowired
-    private PublicacionServicio publicacionServicio;
+    private PizarraServicio pizarraServicio;
     @Autowired
     private AdministradorServicio administradorServicio;
     @Autowired
@@ -50,7 +39,7 @@ public class PortalControlador {
 
     @GetMapping("/")
     public String index(ModelMap modelo) {
-        List<Publicacion> ultimasPublicaciones = publicacionServicio.listarPublicaciones();
+        List<Pizarra> ultimasPublicaciones = pizarraServicio.listarPizarras();
         modelo.addAttribute("publicaciones", ultimasPublicaciones);
         return "index.html";
     }
@@ -62,20 +51,13 @@ public class PortalControlador {
 
     @GetMapping("/registrar")
     public String registrar() {
-        return "signIn";
+        return "signIn.html";
     }
 
     @PostMapping("/registro")
     public String registro(@RequestParam(name = "nombreu") String nombreu, @RequestParam(name = "password") String password) throws MyException, IOException {
         administradorServicio.guardarUsuario(nombreu, password);
         return "index.html";
-    }
-
-    @GetMapping("/publicaciones")
-    public String listar(ModelMap modelo) {
-        List<Publicacion> ultimasPublicaciones = publicacionServicio.listarPublicaciones();
-        modelo.addAttribute("publicaciones", ultimasPublicaciones);
-        return "publicaciones.html";
     }
 
 //
@@ -110,11 +92,11 @@ public class PortalControlador {
 //        return "publicaciones.html";
 //    }
 //
-//    @GetMapping("/editar/{id}")
-//    public String editar(@PathVariable Long id, ModelMap modelo) {
-//        modelo.put("publicacion", publicacionServicio.getReferenceById(id));
-//        return "editar_publicacion.html";
-//    }
+    @GetMapping("/pizarra/{id}")
+    public String verPizarra(@PathVariable Long id, ModelMap modelo) {
+        modelo.put("pizarra", pizarraServicio.getReferenceById(id));
+        return "pizarra.html";
+    }
 //
 //    @GetMapping("/{id}")
 //    public String eliminar(@PathVariable Long id, HttpSession session, ModelMap modelo) {

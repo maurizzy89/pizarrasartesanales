@@ -2,18 +2,18 @@ package mauriNetwork.PizarrasArtesanales.controladores;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+;
 import javax.imageio.ImageIO;
-import javax.servlet.http.HttpSession;
-import mauriNetwork.PizarrasArtesanales.entidades.Publicacion;
-import mauriNetwork.PizarrasArtesanales.entidades.Administrador;
+import mauriNetwork.PizarrasArtesanales.entidades.Pizarra;
 import mauriNetwork.PizarrasArtesanales.entidades.Imagen;
+import mauriNetwork.PizarrasArtesanales.excepciones.MyException;
 import mauriNetwork.PizarrasArtesanales.servicios.AdministradorServicio;
 import mauriNetwork.PizarrasArtesanales.servicios.CloudinaryService;
 import mauriNetwork.PizarrasArtesanales.servicios.ImagenService;
-import mauriNetwork.PizarrasArtesanales.servicios.PublicacionServicio;
-import mauriNetwork.headbangersCave.excepciones.MyException;
+import mauriNetwork.PizarrasArtesanales.servicios.PizarraServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,12 +24,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+
+
 @Controller
 @RequestMapping("/admin")
 public class AdministradorControlador {
 
     @Autowired
-    private PublicacionServicio publicacionServicio;
+    private PizarraServicio pizarraServicio;
     @Autowired
     private AdministradorServicio administradorServicio;
     @Autowired
@@ -39,88 +41,113 @@ public class AdministradorControlador {
 
     @GetMapping("/dashboard")
     public String index(ModelMap modelo) {
-        List<Publicacion> ultimasPublicaciones = publicacionServicio.listarPublicaciones();
+        List<Pizarra> ultimasPublicaciones = pizarraServicio.listarPizarras();
         modelo.addAttribute("publicaciones", ultimasPublicaciones);
         return "index.html";
     }
 
-    @GetMapping("/añadir")
-    public String añadir(Publicacion publicacion) {
-        return "añadir_publicacion.html";
+    @GetMapping("/agregar")
+    public String agregar(Pizarra pizarra) {
+        return "agregar_pizarra.html";
     }
 
-    @PostMapping("/añadido")
-    public String añadido(@RequestParam(name = "multipartFile") MultipartFile multipartFile, @RequestParam(name = "titulo") String titulo, @RequestParam(name = "descripcion") String descripcion, @RequestParam(name = "precio") Integer precio, ModelMap modelo) throws IOException, MyException {
-        BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
-        if (bi == null) {
-            try {
-                publicacionServicio.crearPublicacion(titulo, descripcion, precio, null);
-                modelo.put("exito", "Fuiste registrado correctamente, ya podes loguearte");
-                List<Publicacion> ultimasPublicaciones = publicacionServicio.listarPublicaciones();
-                modelo.addAttribute("publicaciones", ultimasPublicaciones);
-                return "index.html";
-            } catch (MyException e) {
-                modelo.put("error", e.getMessage());
-                return "añadir_publicacion.html";
-            }
+    @PostMapping("/agregado")
+    public String agregado(Pizarra pizarra, @RequestParam(required = false) List<MultipartFile> multipartFiles, @RequestParam(required = false) Integer alto, @RequestParam(required = false) Integer ancho, @RequestParam(required = false) String tamanio, @RequestParam(required = false) String tipo, @RequestParam(required = false) String superficie, @RequestParam(required = false) Integer precio, @RequestParam(required = false) String descripcion, ModelMap modelo) throws Exception, IOException {
+        List<Imagen> imagenes = new ArrayList();
+        int cont = 0;
+        try {
+            pizarraServicio.validar(alto, ancho, tamanio, tipo, superficie, precio, descripcion);
+            for (MultipartFile multipartFile : multipartFiles) {
+                boolean portada = false;
 
-        } else {
-            Map result = cloudinaryService.upload(multipartFile);
-            Imagen imagen
-                    = new Imagen(result.get("original_filename").toString(),
-                            result.get("url").toString(),
-                            result.get("public_id").toString());
-            imagenService.save(imagen);
-            publicacionServicio.crearPublicacion(titulo, descripcion, precio, imagen);
-            modelo.put("exito", "Fuiste registrado correctamente, ya podes loguearte");
-            List<Publicacion> ultimasPublicaciones = publicacionServicio.listarPublicaciones();
-            modelo.addAttribute("publicaciones", ultimasPublicaciones);
-            return "index.html";
+                BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
+                if (bi == null) {
+                    modelo.put("Error", "Tenes que subir, al menos, una imagen");
+                    return "agregar_pizarra.html";
+                }
+                Map result = cloudinaryService.upload(multipartFile);
+
+                //para dejar como portada la primer imagen por defecto
+                if (cont == 0) {
+                    portada = true;
+                }
+                Imagen imagen
+                        = new Imagen(result.get("original_filename").toString(),
+                                result.get("url").toString(),
+                                result.get("public_id").toString(),
+                                portada);
+                imagenService.save(imagen);
+                imagenes.add(imagen);
+                cont++;
+            }
+            pizarraServicio.crearPizarra(alto, ancho, tamanio, tipo, superficie, imagenes, precio, descripcion);
+            modelo.put("exito", "La pizarra se publico correctamente");
+        } catch (MyException ex) {
+            modelo.put("error", ex.getMessage());
+            return "agregar_pizarra.html";
         }
+        List<Pizarra> ultimasPublicaciones = pizarraServicio.listarPizarras();
+        modelo.addAttribute("publicaciones", ultimasPublicaciones);
+        return "index.html";
     }
 
     @GetMapping("/eliminar/{id}")
     public String eliminar(@PathVariable Long id, ModelMap modelo) {
-        modelo.put("publicacion", publicacionServicio.getReferenceById(id));
-        publicacionServicio.eliminarPublicacion(id);
+        modelo.put("publicacion", pizarraServicio.getReferenceById(id));
+        pizarraServicio.eliminarPizarra(id);
         //vuelve a cargar la lista
-        List<Publicacion> ultimasPublicaciones = publicacionServicio.listarPublicaciones();
+        List<Pizarra> ultimasPublicaciones = pizarraServicio.listarPizarras();
         modelo.addAttribute("publicaciones", ultimasPublicaciones);
         return "index.html";
     }
 
     @GetMapping("/editar/{id}")
     public String editar(@PathVariable Long id, ModelMap modelo) {
-        modelo.put("publicacion", publicacionServicio.getReferenceById(id));
-        return "añadir_publicacion.html";
+        modelo.put("pizarra", pizarraServicio.getReferenceById(id));
+        return "pizarra.html";
     }
 
-    @PostMapping("/editado")
-    public String editado(Publicacion publicacion, @RequestParam(name = "multipartFile") MultipartFile multipartFile, @RequestParam(name = "titulo") String titulo, @RequestParam(name = "descripcion") String descripcion, @RequestParam(name = "precio") Integer precio, ModelMap modelo) throws IOException, MyException {
-        BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
-        if (bi == null) {
-            try {
-                publicacionServicio.editarPublicacion(publicacion.getId(), titulo, descripcion, precio, null);
-                modelo.put("exito", "Fuiste registrado correctamente, ya podes loguearte");
-                List<Publicacion> ultimasPublicaciones = publicacionServicio.listarPublicaciones();
-                modelo.addAttribute("publicaciones", ultimasPublicaciones);
-                return "index.html";
-            } catch (MyException e) {
-                modelo.put("error", e.getMessage());
-                return "añadir_publicacion.html";
-            }
-
-        } else {
-            Map result = cloudinaryService.upload(multipartFile);
-            Imagen imagen
-                    = new Imagen(result.get("original_filename").toString(),
-                            result.get("url").toString(),
-                            result.get("public_id").toString());
-            imagenService.save(imagen);
-            publicacionServicio.editarPublicacion(publicacion.getId(), titulo, descripcion, precio, imagen);
-            List<Publicacion> ultimasPublicaciones = publicacionServicio.listarPublicaciones();
-            modelo.addAttribute("publicaciones", ultimasPublicaciones);
-            return "index.html";
-        }
+    @PostMapping("/editar/{id}/modificar_portada")
+    public String modificarPortada(@PathVariable Long id, ModelMap modelo) {
+            imagenService.modificarPortada(id);
+        
+        modelo.put("pizarra", pizarraServicio.getReferenceById(id));
+        return "pizarra.html";
     }
+
+//    @PostMapping("/editado")
+//    public String editado(Pizarra publicacion,
+//            @RequestParam(name = "multipartFiles") List<MultipartFile> multipartFiles,
+//            @RequestParam(name = "tamanio") String tamanio,
+//            @RequestParam(name = "alto") Integer alto,
+//            @RequestParam(name = "ancho") Integer ancho,
+//            @RequestParam(name = "tipo") String tipo,
+//            @RequestParam(name = "precio") Integer precio,
+//            @RequestParam(name = "superficie") String superficie, ModelMap modelo) throws IOException, MyException {
+//        BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
+//        if (bi == null) {
+//            try {
+//                pizarraServicio.editarPizarra(publicacion.getId(), tamanio, alto, ancho, tipo, superficie, null, precio);
+//                modelo.put("exito", "Fuiste registrado correctamente, ya podes loguearte");
+//                List<Pizarra> ultimasPublicaciones = pizarraServicio.listarPizarras();
+//                modelo.addAttribute("publicaciones", ultimasPublicaciones);
+//                return "index.html";
+//            } catch (MyException e) {
+//                modelo.put("error", e.getMessage());
+//                return "añadir_publicacion.html";
+//            }
+//
+//        } else {
+//            Map result = cloudinaryService.upload(multipartFile);
+//            Imagen imagen
+//                    = new Imagen(result.get("original_filename").toString(),
+//                            result.get("url").toString(),
+//                            result.get("public_id").toString());
+//            imagenService.save(imagen);
+//            pizarraServicio.editarPizarra(publicacion.getId(), tamanio, alto, ancho, tipo, superficie, imagenes, precio);
+//            List<Pizarra> ultimasPublicaciones = pizarraServicio.listarPizarras();
+//            modelo.addAttribute("publicaciones", ultimasPublicaciones);
+//            return "index.html";
+//        }
+//    }
 }
