@@ -55,7 +55,7 @@
                     <option>SIMPLE</option>
                     <option>DOBLE</option>
                     <option>ESCOLAR</option>
-                    <option>ESPECIAL</option>
+                    <option>MACETERO</option>
                 </select>
             </div>
             <div align="center" class="form-group my-3">
@@ -72,11 +72,11 @@
                 <input type="text" class="form-control" placeholder="Descripcion" name="descripcion" style="width: 60%" th:field="*{descripcion}">
             </div>
             <div id="div_file">
-                <p id="texto">Seleccionar imagenes</p>
+                <p id="texto">Subir Imagenes</p>
                 <input type="file"  id="btn_enviar" name="multipartFiles" multiple>
             </div>
 
-            <button type="submit" name="agregar" class="btn btn-dark" style="width: 60%; margin-bottom: 10px;">agregar</button>
+            <button type="submit" name="agregar" class="btn btn-dark" style="width: 60%; margin-bottom: 10px;">Agregar</button>
 
             <div align="center">
                 <div th:if="${error != null}" class="card text-white bg-danger m-2 mensajeError" style="width: 60%">

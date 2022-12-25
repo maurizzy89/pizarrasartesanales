@@ -44,6 +44,69 @@ public class PortalControlador {
         return "index.html";
     }
 
+    @GetMapping("/pizarras_simples")
+    public String listasPizarrasSimples(ModelMap modelo) {
+        List<Pizarra> pizarrasSimples = pizarraServicio.listarPizarrasSimples();
+        modelo.addAttribute("publicaciones", pizarrasSimples);
+        return "index.html";
+    }
+
+    @GetMapping("/pizarras_doble")
+    public String listasPizarrasDoble(ModelMap modelo) {
+        List<Pizarra> pizarrasDoble = pizarraServicio.listarPizarrasDoble();
+        modelo.addAttribute("publicaciones", pizarrasDoble);
+        return "index.html";
+    }
+
+    @GetMapping("/pizarras_escolares")
+    public String listasPizarrasEscolares(ModelMap modelo) {
+        List<Pizarra> pizarrasEscolares = pizarraServicio.listarPizarrasEscolares();
+        modelo.addAttribute("publicaciones", pizarrasEscolares);
+        return "index.html";
+    }
+
+    @GetMapping("/pizarras_maceteras")
+    public String listasPizarrasMaceteras(ModelMap modelo) {
+        List<Pizarra> pizarrasMaceteras = pizarraServicio.listarPizarrasMaceteras();
+        modelo.addAttribute("publicaciones", pizarrasMaceteras);
+        return "index.html";
+    }
+
+    @GetMapping("/pizarras_madera")
+    public String listasPizarrasMadera(ModelMap modelo) {
+        List<Pizarra> pizarrasMadera = pizarraServicio.listarPizarrasMadera();
+        modelo.addAttribute("publicaciones", pizarrasMadera);
+        return "index.html";
+    }
+
+    @GetMapping("/pizarras_chapa")
+    public String listasPizarrasChapa(ModelMap modelo) {
+        List<Pizarra> pizarrasChapa = pizarraServicio.listarPizarrasChapa();
+        modelo.addAttribute("publicaciones", pizarrasChapa);
+        return "index.html";
+    }
+
+    @GetMapping("/pizarras_chicas")
+    public String listasPizarrasChicas(ModelMap modelo) {
+        List<Pizarra> pizarrasChicas = pizarraServicio.listarPizarrasChicas();
+        modelo.addAttribute("publicaciones", pizarrasChicas);
+        return "index.html";
+    }
+
+    @GetMapping("/pizarras_medianas")
+    public String listasPizarrasMedianas(ModelMap modelo) {
+        List<Pizarra> pizarrasMedianas = pizarraServicio.listarPizarrasMedianas();
+        modelo.addAttribute("publicaciones", pizarrasMedianas);
+        return "index.html";
+    }
+
+    @GetMapping("/pizarras_grandes")
+    public String listasPizarrasGrandes(ModelMap modelo) {
+        List<Pizarra> pizarrasGrandes = pizarraServicio.listarPizarrasGrandes();
+        modelo.addAttribute("publicaciones", pizarrasGrandes);
+        return "index.html";
+    }
+
     @GetMapping("/login")
     public String login(ModelMap modelo) {
         return "login.html";

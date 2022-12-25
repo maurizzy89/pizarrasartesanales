@@ -3,6 +3,7 @@ package mauriNetwork.PizarrasArtesanales.servicios;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import mauriNetwork.PizarrasArtesanales.entidades.Imagen;
+import mauriNetwork.PizarrasArtesanales.entidades.Pizarra;
 import mauriNetwork.PizarrasArtesanales.repositorio.ImagenRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,7 +49,8 @@ public class ImagenService {
 //        }
 //        return urlNueva;
 //    }
+    
     public void modificarPortada(Long id) {
-
+        Pizarra pizarra = pizarraServicio.getReferenceById(id);
     }
 }

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
@@ -14,6 +15,7 @@
         <link rel="stylesheet" href="/css/styles.css" />
         <link rel="stylesheet" href="/css/styles2.css" />
     </head>
+
     <body class="bg-light">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light">
@@ -29,7 +31,48 @@
         </nav>
 
         <!-- Section-->
-        <section>
+        <form th:action="@{/admin/editado}" method="POST" align="center" enctype="multipart/form-data" th:object="${pizarra}">
+            <input type="hidden" name="id" th:field="*{id}">
+
+            <div class="form-group my-3">
+                <p>Editar Pizarra</p>
+            </div>
+            <div align="center" class="form-group my-3">
+                <input type="number" class="form-control" placeholder="Alto" name="alto" style="width: 25%" th:field="*{alto}">
+                X
+                <input type="number" class="form-control" placeholder="Ancho" name="ancho" style="width: 25%" th:field="*{ancho}">
+            </div>
+            <div align="center" class="form-group my-3">
+                <select class="form-control" style="width: 60%" name="tamanio">
+                    <option disabled selected>Elegir tamaño</option>
+                    <option>CHICO</option>
+                    <option>MEDIANO</option>
+                    <option>GRANDE</option>
+                </select>
+            </div>
+            <div align="center" class="form-group my-3">
+                <select class="form-control" style="width: 60%" name="tipo" >
+                    <option disabled selected>Elegir tipo</option>
+                    <option>SIMPLE</option>
+                    <option>DOBLE</option>
+                    <option>ESCOLAR</option>
+                    <option>MACETERO</option>
+                </select>
+            </div>
+            <div align="center" class="form-group my-3">
+                <select class="form-control" style="width: 60%" name="superficie">
+                    <option disabled selected>Tipo de superficie</option>
+                    <option>MADERA</option>
+                    <option>CHAPA</option>
+                </select>
+            </div>
+            <div align="center" class="form-group my-3">
+                <input type="number" class="form-control" placeholder="Precio" name="precio" style="width: 60%" th:field="*{precio}">
+            </div>
+            <div align="center" class="form-group my-3">
+                <input type="text" class="form-control" placeholder="Descripcion" name="descripcion" style="width: 60%" th:field="*{descripcion}">
+            </div>
+            
             <div class="row m-4 row-cols-xl-3 justify-content-center">
                 <div class="col mb-1 px-1" th:each="imagen:${pizarra.imagenes}">
                     <div class="card h-10">
@@ -44,16 +87,23 @@
                     </div>
                 </div>
             </div>
-
-            <div class="text-center py-3">
-                <h5 class="fw-bolder" th:text="'Medida Total: ' + ${pizarra.alto} +' x ' + ${pizarra.ancho}"></h5>
-                <h6 class="fw-bolder" th:text="'Tipo: ' + ${pizarra.tipo}"></h6>
-                <h6 class="fw-bolder" th:text="'Superficie: ' +  ${pizarra.superficie}"></h6>
-                <h4 class="fw-strong" th:text="'$' + ${pizarra.precio}"></h4>
+            
+            <div id="div_file">
+                <p id="texto">Actualizar Imagenes</p>
+                <input type="file"  id="btn_enviar" name="multipartFiles" multiple>
             </div>
 
+            <button type="submit" name="agregar" class="btn btn-dark" style="width: 60%; margin-bottom: 10px;">Listo</button>
 
-        </section>
+            <div align="center">
+                <div th:if="${error != null}" class="card text-white bg-danger m-2 mensajeError" style="width: 60%">
+                    <div class="card-body" >
+                        <h5 class="card-title">Error</h5>
+                        <p class="card-text" th:text="${error}"></p>
+                    </div>
+                </div>
+            </div>
+        </form>
 
         <!-- Footer-->
         <footer class="py-5 bg-dark" style="position:relative;width:100%;bottom:0">

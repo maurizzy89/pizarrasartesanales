@@ -104,50 +104,32 @@ public class AdministradorControlador {
     @GetMapping("/editar/{id}")
     public String editar(@PathVariable Long id, ModelMap modelo) {
         modelo.put("pizarra", pizarraServicio.getReferenceById(id));
-        return "pizarra.html";
+        return "editar_pizarra.html";
     }
 
-    @PostMapping("/editar/{id}/modificar_portada")
-    public String modificarPortada(@PathVariable Long id, ModelMap modelo) {
-            imagenService.modificarPortada(id);
-        
-        modelo.put("pizarra", pizarraServicio.getReferenceById(id));
-        return "pizarra.html";
-    }
-
-//    @PostMapping("/editado")
-//    public String editado(Pizarra publicacion,
-//            @RequestParam(name = "multipartFiles") List<MultipartFile> multipartFiles,
-//            @RequestParam(name = "tamanio") String tamanio,
-//            @RequestParam(name = "alto") Integer alto,
-//            @RequestParam(name = "ancho") Integer ancho,
-//            @RequestParam(name = "tipo") String tipo,
-//            @RequestParam(name = "precio") Integer precio,
-//            @RequestParam(name = "superficie") String superficie, ModelMap modelo) throws IOException, MyException {
-//        BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
-//        if (bi == null) {
-//            try {
-//                pizarraServicio.editarPizarra(publicacion.getId(), tamanio, alto, ancho, tipo, superficie, null, precio);
-//                modelo.put("exito", "Fuiste registrado correctamente, ya podes loguearte");
-//                List<Pizarra> ultimasPublicaciones = pizarraServicio.listarPizarras();
-//                modelo.addAttribute("publicaciones", ultimasPublicaciones);
-//                return "index.html";
-//            } catch (MyException e) {
-//                modelo.put("error", e.getMessage());
-//                return "añadir_publicacion.html";
-//            }
+//    @PostMapping("/editar/{id}/modificar_portada/{id}")
+//    public String modificarPortada(@PathVariable Long id, ModelMap modelo) {
+//        imagenService.modificarPortada(id);
 //
-//        } else {
-//            Map result = cloudinaryService.upload(multipartFile);
-//            Imagen imagen
-//                    = new Imagen(result.get("original_filename").toString(),
-//                            result.get("url").toString(),
-//                            result.get("public_id").toString());
-//            imagenService.save(imagen);
-//            pizarraServicio.editarPizarra(publicacion.getId(), tamanio, alto, ancho, tipo, superficie, imagenes, precio);
-//            List<Pizarra> ultimasPublicaciones = pizarraServicio.listarPizarras();
-//            modelo.addAttribute("publicaciones", ultimasPublicaciones);
-//            return "index.html";
-//        }
+//        modelo.put("pizarra", pizarraServicio.getReferenceById(id));
+//        return "pizarra.html";
 //    }
+    @PostMapping("/editado")
+    public String editado(Pizarra pizarra,
+            @RequestParam(name = "alto") Integer alto,
+            @RequestParam(name = "ancho") Integer ancho,
+            @RequestParam(name = "tamanio") String tamanio,
+            @RequestParam(name = "tipo") String tipo,
+            @RequestParam(name = "superficie") String superficie,
+            @RequestParam(name = "precio") Integer precio,
+            @RequestParam(name = "descripcion") String descripcion,
+            @RequestParam(name = "multipartFiles") List<MultipartFile> multipartFiles,
+            ModelMap modelo) throws IOException, MyException {
+
+        pizarraServicio.editarPizarra(pizarra.getId(), alto, ancho, tamanio, tipo, superficie, precio, descripcion);
+        modelo.put("exito", "Fuiste registrado correctamente, ya podes loguearte");
+        List<Pizarra> ultimasPublicaciones = pizarraServicio.listarPizarras();
+        modelo.addAttribute("publicaciones", ultimasPublicaciones);
+        return "index.html";
+    }
 }

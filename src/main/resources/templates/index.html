@@ -38,25 +38,37 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Acerca de</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Todas las Pizarras</a></li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tienda</a>
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Filtrar por Tipo</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">Todas las pizarras</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="#!">Pizarras Doble</a></li>
-                                <li><a class="dropdown-item" href="#!">Pizarras Pared</a></li>
-                                <li><a class="dropdown-item" href="#!">Pizarras Escolares</a></li>
-                                <li><a class="dropdown-item" href="#!">Pizarras Maceteras</a></li>
+                                <li><a class="dropdown-item" href="/pizarras_simple">Simples</a></li>
+                                <li><a class="dropdown-item" href="/pizarras_doble">Dobles</a></li>
+                                <li><a class="dropdown-item" href="/pizarras_escolares">Escolares</a></li>
+                                <li><a class="dropdown-item" href="/pizarras_maceteras">Maceteras</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Filtrar por Tamaño</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/pizarras_chicas">Chicas</a></li>
+                                <li><a class="dropdown-item" href="/pizarras_medianas">Medianas</a></li>
+                                <li><a class="dropdown-item" href="/pizarras_grandes">Grandes</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Filtrar por Superficie</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/pizarras_madera">Madera</a></li>
+                                <li><a class="dropdown-item" href="/pizarras_chapa">Chapa</a></li>
                             </ul>
                         </li>
                         <span sec:authorize="isAnonymous()"> 
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="/login">Acceso Admin</a></li>
                         </span>
-<!--                        <span sec:authorize="isAnonymous()"> 
-                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="/registrar">Registro Admin</a></li>
-                        </span>-->
+                        <!--                        <span sec:authorize="isAnonymous()"> 
+                                                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/registrar">Registro Admin</a></li>
+                                                </span>-->
                         <span sec:authorize="hasAnyRole('ADMIN')">
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="/admin/agregar">Agregar Publicación</a></li>
                         </span>
@@ -119,7 +131,7 @@
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
                     <div class="col mb-5" th:each="publicacion:${publicaciones}">
-                        <div class="card h-100" >
+                        <div class="card h-100">
                             <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem" th:text='${publicacion.tamanio}'></div>
                             <a th:href="@{/pizarra/__${publicacion.id}__}" style="text-decoration: none">
                                 <div th:each="imagen:${publicacion.imagenes}">
@@ -128,7 +140,7 @@
                                     </div>
                                 </div>
                             </a>
-                            <div class="card-body p-4">
+                            <div class="card-body">
                                 <div class="text-center">
                                     <h5 class="fw-bolder" th:text="${publicacion.alto} +' x ' + ${publicacion.ancho}"></h5>
                                     <h6 class="fw-bolder" th:text="${publicacion.tipo}"></h6>
@@ -137,7 +149,7 @@
                                     <span class="text-muted" th:text="'$' + ${publicacion.precio}"></span>
                                 </div>
                             </div>
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="card-footer pt-0 border-top-0 bg-transparent">
                                 <span sec:authorize="hasAnyRole('ADMIN')">
                                     <div class="text-center"><a class="btn btn-dark mt-1" th:href="@{/admin/editar/__${publicacion.id}__}">Editar</a></div>
                                     <div class="text-center"><a class="btn btn-danger mt-1" th:href="@{/admin/eliminar/__${publicacion.id}__}">Eliminar</a></div>
