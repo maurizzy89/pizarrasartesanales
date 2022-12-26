@@ -39,4 +39,10 @@ public interface PizarraRepositorio extends JpaRepository<Pizarra, Long> {
     @Query("SELECT p FROM Pizarra p WHERE p.tamanio='GRANDE' ORDER BY p.id DESC")
     public List<Pizarra> listarPizarrasGrandes();
 
+    @Query("SELECT p FROM Pizarra p ORDER BY p.precio")
+    public List<Pizarra> listarMenorAMayor();
+
+    @Query("SELECT p FROM Pizarra p ORDER BY p.precio DESC")
+    public List<Pizarra> listarMayorAMenor();
+
 }

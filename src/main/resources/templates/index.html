@@ -63,6 +63,13 @@
                                 <li><a class="dropdown-item" href="/pizarras_chapa">Chapa</a></li>
                             </ul>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Ordenar por Precio</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/pizarras_menor_a_mayor_precio">de Menor a Mayor precio</a></li>
+                                <li><a class="dropdown-item" href="/pizarras_mayor_a_menor_precio">de Mayor a Menor precio</a></li>
+                            </ul>
+                        </li>
                         <span sec:authorize="isAnonymous()"> 
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="/login">Acceso Admin</a></li>
                         </span>

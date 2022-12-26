@@ -59,7 +59,7 @@ public class PizarraServicio {
             pizarraRepositorio.save(publicacion);
         }
     }
-    
+
     @Transactional
     public void eliminarPizarra(Long id) {
         Optional<Pizarra> respuestaPublicacion = pizarraRepositorio.findById(id);
@@ -68,6 +68,20 @@ public class PizarraServicio {
             Pizarra publicacion = respuestaPublicacion.get();
             pizarraRepositorio.delete(publicacion);
         }
+    }
+
+    public List<Pizarra> listarMenorAMayorPrecio() {
+        List<Pizarra> pizarrasTodas = new ArrayList();
+        pizarrasTodas = pizarraRepositorio.listarMenorAMayor();
+
+        return pizarrasTodas;
+    }
+
+    public List<Pizarra> listarMayorAMenorPrecio() {
+        List<Pizarra> pizarrasTodas = new ArrayList();
+        pizarrasTodas = pizarraRepositorio.listarMayorAMenor();
+
+        return pizarrasTodas;
     }
 
     public List<Pizarra> listarPizarras() {
