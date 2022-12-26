@@ -74,10 +74,15 @@
     display: block;
 }
 
-.dropend:hover > .dropdown-content{
-    display: block;
-    position: absolute;
-    width:100%;
+.dropend:hover > .dropdown-menu{
+    display: flex;
+    position: relative;
+    left:160px;
+    top:0;
+}
+
+.dropdown-item#1 {
+    height:2vh;
 }
 
 .imagen h1{
