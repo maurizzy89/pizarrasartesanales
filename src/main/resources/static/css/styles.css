@@ -70,6 +70,16 @@
     box-sizing: border-box;
 }
 
+.dropdown:hover > .dropdown-menu {
+    display: block;
+}
+
+.dropend:hover > .dropdown-content{
+    display: block;
+    position: absolute;
+    width:100%;
+}
+
 .imagen h1{
     font-size: 4rem;
     color:white;

@@ -40,31 +40,37 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Todas las Pizarras</a></li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Filtrar por Tipo</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/pizarras_simple">Simples</a></li>
-                                <li><a class="dropdown-item" href="/pizarras_doble">Dobles</a></li>
-                                <li><a class="dropdown-item" href="/pizarras_escolares">Escolares</a></li>
-                                <li><a class="dropdown-item" href="/pizarras_maceteras">Maceteras</a></li>
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" data-bs-auto-close="outside">Filtrar Pizarras</a>
+                            <ul class="dropdown-menu">
+                                <li class="dropend">
+                                    <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside">por Tipo </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="/pizarras_simple">Simples</a></li>
+                                        <li><a class="dropdown-item" href="/pizarras_doble">Dobles</a></li>
+                                        <li><a class="dropdown-item" href="/pizarras_escolares">Escolares</a></li>
+                                        <li><a class="dropdown-item" href="/pizarras_maceteras">Maceteras</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropend">
+                                    <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside">por Tamaño </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="/pizarras_chicas">Chicas</a></li>
+                                        <li><a class="dropdown-item" href="/pizarras_medianas">Medianas</a></li>
+                                        <li><a class="dropdown-item" href="/pizarras_grandes">Grandes</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropend">
+                                    <a class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside">por Superficie </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="/pizarras_madera">Madera</a></li>
+                                        <li><a class="dropdown-item" href="/pizarras_chapa">Chapa</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
+
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Filtrar por Tamaño</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/pizarras_chicas">Chicas</a></li>
-                                <li><a class="dropdown-item" href="/pizarras_medianas">Medianas</a></li>
-                                <li><a class="dropdown-item" href="/pizarras_grandes">Grandes</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Filtrar por Superficie</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/pizarras_madera">Madera</a></li>
-                                <li><a class="dropdown-item" href="/pizarras_chapa">Chapa</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Ordenar por Precio</a>
+                            <a class="nav-link dropdown-toggle">Ordenar por Precio</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="/pizarras_menor_a_mayor_precio">de Menor a Mayor precio</a></li>
                                 <li><a class="dropdown-item" href="/pizarras_mayor_a_menor_precio">de Mayor a Menor precio</a></li>
