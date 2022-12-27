@@ -156,11 +156,9 @@
                             </a>
                             <div class="card-body">
                                 <div class="text-center">
-                                    <h5 class="fw-bolder text-info" th:text=' ${publicacion.tamanio}'></h5>
-                                    <h4 class="fw-bolder" th:text="${publicacion.alto} +' x ' + ${publicacion.ancho}"></h4>
-                                    <h5 class="fw-bolder" th:text="'Tipo: ' + ${publicacion.tipo}"></h5>
-                                    <h5 class="fw-bolder" th:text="'Superficie: ' + ${publicacion.superficie}"></h5>
-                                    <h6 class="fw-bolder" th:text="${publicacion.descripcion}"></h6>
+                                    <h6 class="fw-bolder text-info" th:text=' ${publicacion.tamanio}'></h6>
+                                    <h6 class="fw-bolder" th:text="${publicacion.alto} +' x ' + ${publicacion.ancho}"></h6>
+                                    <p class="fw-bolder" th:text="${publicacion.tipo}" style='font-size: 12px; margin:4px;'></p>
                                 </div>
                             </div>
                             <div class="card-footer pt-0 border-top-0 bg-transparent">
