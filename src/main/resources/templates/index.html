@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="/css/styles.css" />
         <link rel="stylesheet" href="/css/styles2.css" />
         <link rel="stylesheet" href="/css/whatsapp.css">
-        <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Prosto+One&family=Shadows+Into+Light&display=swap" rel="stylesheet">
     </head>
 
     <body class="bg-light">
@@ -101,7 +101,7 @@
         <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito">
             <div class="card-body">
                 <h5 class="card-title">Exito</h5>
-                <p class="card-text" th:text="${exito}"></p>
+                <h6 class="card-text" th:text="${exito}"></h6>
             </div>
         </div>
         <!-- Header-->
@@ -158,8 +158,9 @@
                                 <div class="text-center">
                                     <h5 class="fw-bolder text-info" th:text=' ${publicacion.tamanio}'></h5>
                                     <h4 class="fw-bolder" th:text="${publicacion.alto} +' x ' + ${publicacion.ancho}"></h4>
-                                    <h4 class="fw-bolder" th:text="'Tipo: ' + ${publicacion.tipo}"></h4>
-                                    <h4 class="fw-bolder" th:text="'Superficie: ' + ${publicacion.superficie}"></h4>
+                                    <h5 class="fw-bolder" th:text="'Tipo: ' + ${publicacion.tipo}"></h5>
+                                    <h5 class="fw-bolder" th:text="'Superficie: ' + ${publicacion.superficie}"></h5>
+                                    <h6 class="fw-bolder" th:text="${publicacion.descripcion}"></h6>
                                 </div>
                             </div>
                             <div class="card-footer pt-0 border-top-0 bg-transparent">

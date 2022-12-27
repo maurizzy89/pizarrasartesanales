@@ -71,7 +71,8 @@
 }
 
 .card-body{
-    font-family: 'Shadows Into Light', cursive;
+    font-family: 'Prosto One', cursive;
+    font-size: 10px;
 }
 
 .dropdown:hover > .dropdown-menu {
