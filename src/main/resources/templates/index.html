@@ -146,7 +146,7 @@
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
                     <div class="col mb-5" th:each="publicacion:${publicaciones}">
                         <div class="card h-100">
-                            <div class="badge bg-light text-dark position-absolute fw-bolder" style="font-family: serif ;  top: 0.5rem; right: 0.5rem; width: 22%; font-size: 20px" th:text="'$' + ${publicacion.precio}"></div>
+                            <div class="bg-light text-dark fw-bolder" style="position: absolute;font-size:20px;font-family: serif ;  top: 0.5rem; right: 0.5rem; text-align: right; border-radius: 5px" th:text="'$' + ${publicacion.precio}"></div>
                             <a th:href="@{/pizarra/__${publicacion.id}__}" style="text-decoration: none">
                                 <div th:each="imagen:${publicacion.imagenes}">
                                     <div th:if="${imagen.portada == true}">
