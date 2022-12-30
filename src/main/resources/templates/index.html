@@ -159,6 +159,12 @@
                                     <h6 class="fw-bolder text-info" th:text=' ${publicacion.tamanio}'></h6>
                                     <h6 class="fw-bolder" th:text="${publicacion.alto} +' x ' + ${publicacion.ancho}"></h6>
                                     <p class="fw-bolder" th:text="${publicacion.tipo}" style='font-size: 12px; margin:4px;'></p>
+                                    <span th:if="${publicacion.superficie == 'MADERA'}">
+                                        <p class="bg-secondary text-light fw-bolder" th:text="'Superficie de ' + ${publicacion.superficie}" style='font-size: 12px; margin:4px;'></p>
+                                    </span>
+                                    <span th:if="${publicacion.superficie == 'CHAPA'}">
+                                        <p class="bg-info text-light fw-bolder" th:text="'Superficie de ' + ${publicacion.superficie}" style='font-size: 12px; margin:4px;'></p>
+                                    </span>
                                 </div>
                             </div>
                             <div class="card-footer pt-0 border-top-0 bg-transparent">

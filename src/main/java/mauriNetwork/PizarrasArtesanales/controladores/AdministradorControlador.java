@@ -114,6 +114,7 @@ public class AdministradorControlador {
 //        modelo.put("pizarra", pizarraServicio.getReferenceById(id));
 //        return "pizarra.html";
 //    }
+    
     @PostMapping("/editado")
     public String editado(Pizarra pizarra,
             @RequestParam(name = "alto") Integer alto,
@@ -127,7 +128,7 @@ public class AdministradorControlador {
             ModelMap modelo) throws IOException, MyException {
 
         pizarraServicio.editarPizarra(pizarra.getId(), alto, ancho, tamanio, tipo, superficie, precio, descripcion);
-        modelo.put("exito", "Fuiste registrado correctamente, ya podes loguearte");
+        modelo.put("exito", "La pizarra se edito correctamente");
         List<Pizarra> ultimasPublicaciones = pizarraServicio.listarPizarras();
         modelo.addAttribute("publicaciones", ultimasPublicaciones);
         return "index.html";
