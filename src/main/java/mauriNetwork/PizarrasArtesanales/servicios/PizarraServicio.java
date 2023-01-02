@@ -157,22 +157,22 @@ public class PizarraServicio {
     public void validar(Integer alto, Integer ancho, String tamanio, String tipo, String superficie, Integer precio, String descripcion) throws MyException {
 
         if (alto == null) {
-            throw new MyException("La altura no puede estar vacia");
+            throw new MyException("La ALTURA no puede estar vacia");
         }
         if (ancho == null) {
-            throw new MyException("El ancho no puede estar vacio");
+            throw new MyException("El ANCHO no puede estar vacio");
         }
         if (tamanio == null || tamanio.isEmpty()) {
-            throw new MyException("Tenes que seleccionar el tamaño de la pizarra");
+            throw new MyException("Tenes que seleccionar el TAMAÑO de la pizarra");
         }
         if (tipo == null || tipo.isEmpty()) {
-            throw new MyException("Tenes que seleccionar el tipo de pizarra");
+            throw new MyException("Tenes que seleccionar el TIPO de pizarra");
         }
         if (superficie == null || superficie.isEmpty()) {
-            throw new MyException("Tenes que seleccionar la superficie de la pizarra");
+            throw new MyException("Tenes que seleccionar la SUPERFICIE de la pizarra");
         }
         if (precio == null) {
-            throw new MyException("El precio no puede estar vacio");
+            throw new MyException("El PRECIO no puede estar vacio");
         }
     }
 
@@ -181,15 +181,25 @@ public class PizarraServicio {
     }
 
     @Transactional
-    public void eliminarImagen(Long idPublicacion) {
-        Optional<Pizarra> respuestaPublicacion = pizarraRepositorio.findById(idPublicacion);
+    public void eliminarImagen(Long idPizarra) {
+        Optional<Pizarra> respuestaPublicacion = pizarraRepositorio.findById(idPizarra);
 
         if (respuestaPublicacion.isPresent()) {
-            Pizarra publicacion = respuestaPublicacion.get();
+            Pizarra pizarra = respuestaPublicacion.get();
 
-            publicacion.setImagenes(null);
+            pizarra.setImagenes(null);
 
-            pizarraRepositorio.save(publicacion);
+            pizarraRepositorio.save(pizarra);
+        }
+    }
+
+    public void borrarImagenDeLaLista(Imagen imagen, Long id) {
+        Pizarra pizarra = pizarraRepositorio.getReferenceById(id);
+        List<Imagen> imagenes = new ArrayList();
+        if (!pizarra.getImagenes().isEmpty()) {
+            imagenes.addAll(pizarra.getImagenes());
+            imagenes.remove(imagen);
+            pizarra.setImagenes(imagenes);
         }
     }
 }

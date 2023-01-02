@@ -1,5 +1,7 @@
 package mauriNetwork.PizarrasArtesanales.servicios;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import mauriNetwork.PizarrasArtesanales.entidades.Imagen;
@@ -49,8 +51,19 @@ public class ImagenService {
 //        }
 //        return urlNueva;
 //    }
-    
-    public void modificarPortada(Long id) {
+    public void modificarPortada(Long id, int idInt) {
         Pizarra pizarra = pizarraServicio.getReferenceById(id);
+        List<Imagen> imagenes = pizarra.getImagenes();
+        for (Imagen imagen : imagenes) {
+            if (imagen.isPortada()) {
+                imagen.setPortada(false);
+            }
+        }
+        for (Imagen imagen : imagenes) {
+            if (imagen.getId() == idInt) {
+                imagen.setPortada(true);
+            }
+        }
+
     }
 }

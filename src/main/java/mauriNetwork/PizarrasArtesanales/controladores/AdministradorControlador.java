@@ -3,8 +3,10 @@ package mauriNetwork.PizarrasArtesanales.controladores;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 ;
 import javax.imageio.ImageIO;
 import mauriNetwork.PizarrasArtesanales.entidades.Pizarra;
@@ -107,28 +109,47 @@ public class AdministradorControlador {
         return "editar_pizarra.html";
     }
 
-//    @PostMapping("/editar/{id}/modificar_portada/{id}")
-//    public String modificarPortada(@PathVariable Long id, ModelMap modelo) {
-//        imagenService.modificarPortada(id);
-//
-//        modelo.put("pizarra", pizarraServicio.getReferenceById(id));
-//        return "pizarra.html";
-//    }
-    
+    @GetMapping("/eliminar/{id}/imagen/{idInt}")
+    public String eliminarImagen(@PathVariable Long id, @PathVariable int idInt, ModelMap modelo) {
+        Pizarra pizarra = pizarraServicio.getReferenceById(id);
+        List imagenes = pizarra.getImagenes();
+        Optional<Imagen> respuestaImagen = imagenService.getOne(idInt);
+        if (respuestaImagen.isPresent()) {
+            pizarraServicio.borrarImagenDeLaLista(respuestaImagen.get(), id);
+        }
+        imagenService.delete(idInt);
+        modelo.put("pizarra", pizarraServicio.getReferenceById(id));
+        return "editar_pizarra.html";
+    }
+
+    @GetMapping("/editar/{id}/establecer_portada/{idInt}")
+    public String establecerPortada(@PathVariable Long id, @PathVariable int idInt, ModelMap modelo) {
+        imagenService.modificarPortada(id, idInt);
+
+        modelo.put("pizarra", pizarraServicio.getReferenceById(id));
+        return "editar_pizarra.html";
+    }
+
     @PostMapping("/editado")
     public String editado(Pizarra pizarra,
-            @RequestParam(name = "alto") Integer alto,
-            @RequestParam(name = "ancho") Integer ancho,
-            @RequestParam(name = "tamanio") String tamanio,
-            @RequestParam(name = "tipo") String tipo,
-            @RequestParam(name = "superficie") String superficie,
-            @RequestParam(name = "precio") Integer precio,
-            @RequestParam(name = "descripcion") String descripcion,
-            @RequestParam(name = "multipartFiles") List<MultipartFile> multipartFiles,
+            @RequestParam(required = false) Integer alto,
+            @RequestParam(required = false) Integer ancho,
+            @RequestParam(required = false) String tamanio,
+            @RequestParam(required = false) String tipo,
+            @RequestParam(required = false) String superficie,
+            @RequestParam(required = false) Integer precio,
+            @RequestParam(required = false) String descripcion,
+            @RequestParam(required = false) List<MultipartFile> multipartFiles,
             ModelMap modelo) throws IOException, MyException {
+        try {
+            pizarraServicio.editarPizarra(pizarra.getId(), alto, ancho, tamanio, tipo, superficie, precio, descripcion);
 
-        pizarraServicio.editarPizarra(pizarra.getId(), alto, ancho, tamanio, tipo, superficie, precio, descripcion);
-        modelo.put("exito", "La pizarra se edito correctamente");
+            modelo.put("exito", "La pizarra se edito correctamente");
+        } catch (MyException ex) {
+            modelo.put("error", ex.getMessage());
+            modelo.put("pizarra", pizarraServicio.getReferenceById(pizarra.getId()));
+            return "editar_pizarra.html";
+        }
         List<Pizarra> ultimasPublicaciones = pizarraServicio.listarPizarras();
         modelo.addAttribute("publicaciones", ultimasPublicaciones);
         return "index.html";
