@@ -131,7 +131,7 @@ public class AdministradorControlador {
     }
 
     @PostMapping("/editado")
-    public String editado(Pizarra pizarra,
+    public String editado(@RequestParam(required = false) Long id,
             @RequestParam(required = false) Integer alto,
             @RequestParam(required = false) Integer ancho,
             @RequestParam(required = false) String tamanio,
@@ -141,9 +141,23 @@ public class AdministradorControlador {
             @RequestParam(required = false) String descripcion,
             @RequestParam(required = false) List<MultipartFile> multipartFiles,
             ModelMap modelo) throws IOException, MyException {
+        Pizarra pizarra = pizarraServicio.getReferenceById(id);
+        List<Imagen> imagenes = pizarra.getImagenes();
         try {
-            pizarraServicio.editarPizarra(pizarra.getId(), alto, ancho, tamanio, tipo, superficie, precio, descripcion);
+            for (MultipartFile multipartFile : multipartFiles) {
+                boolean portada = false;
 
+                BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
+                Map result = cloudinaryService.upload(multipartFile);
+                Imagen imagen
+                        = new Imagen(result.get("original_filename").toString(),
+                                result.get("url").toString(),
+                                result.get("public_id").toString(),
+                                portada);
+                imagenService.save(imagen);
+                imagenes.add(imagen);
+            }
+            pizarraServicio.editarPizarra(id, alto, ancho, tamanio, tipo, superficie, precio, descripcion);
             modelo.put("exito", "La pizarra se edito correctamente");
         } catch (MyException ex) {
             modelo.put("error", ex.getMessage());

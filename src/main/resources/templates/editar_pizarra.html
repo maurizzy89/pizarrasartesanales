@@ -90,9 +90,11 @@
                 </div>
             </div>
 
-            <div><a class="btn btn-secondary mt-2 mb-2"  id="texto" th:href="@{/admin/editar/__${pizarra.id}__/agregar_imagenes}">Agregar Imagenes</a>
-            <input type="file"  id="btn_enviar" name="multipartFiles" multiple>
+            <div id="div_file">
+                <p id="texto">Seleccionar mas imagenes</p>
+                <input type="file"  id="btn_enviar" name="multipartFiles" multiple>
             </div>
+<!--            <a class="btn btn-secondary mt-2 mb-2"   th:href="@{/admin/editar/__${pizarra.id}__/agregar_imagenes}">Seleccionar Imagenes</a><p>-->
 
             <button type="submit" name="agregar" class="btn btn-dark" style="width: 60%; margin-bottom: 10px;">Listo</button>
 
