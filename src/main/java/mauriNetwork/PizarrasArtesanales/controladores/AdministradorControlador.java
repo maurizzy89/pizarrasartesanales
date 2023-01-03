@@ -3,11 +3,9 @@ package mauriNetwork.PizarrasArtesanales.controladores;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-;
 import javax.imageio.ImageIO;
 import mauriNetwork.PizarrasArtesanales.entidades.Pizarra;
 import mauriNetwork.PizarrasArtesanales.entidades.Imagen;
@@ -25,8 +23,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
-
 
 @Controller
 @RequestMapping("/admin")
@@ -131,7 +127,7 @@ public class AdministradorControlador {
     }
 
     @PostMapping("/editado")
-    public String editado(@RequestParam(required = false) Long id,
+    public String editado(Pizarra pizarra, @RequestParam(required = false) Long id,
             @RequestParam(required = false) Integer alto,
             @RequestParam(required = false) Integer ancho,
             @RequestParam(required = false) String tamanio,
@@ -141,13 +137,17 @@ public class AdministradorControlador {
             @RequestParam(required = false) String descripcion,
             @RequestParam(required = false) List<MultipartFile> multipartFiles,
             ModelMap modelo) throws IOException, MyException {
-        Pizarra pizarra = pizarraServicio.getReferenceById(id);
-        List<Imagen> imagenes = pizarra.getImagenes();
+        Pizarra pizarra2 = pizarraServicio.getReferenceById(id);
+        List<Imagen> imagenes = pizarra2.getImagenes();
         try {
+            pizarraServicio.validar(alto, ancho, tamanio, tipo, superficie, precio, descripcion);
+
             for (MultipartFile multipartFile : multipartFiles) {
                 boolean portada = false;
-
                 BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
+                if (bi == null) {
+                    break;
+                }
                 Map result = cloudinaryService.upload(multipartFile);
                 Imagen imagen
                         = new Imagen(result.get("original_filename").toString(),
@@ -161,7 +161,7 @@ public class AdministradorControlador {
             modelo.put("exito", "La pizarra se edito correctamente");
         } catch (MyException ex) {
             modelo.put("error", ex.getMessage());
-            modelo.put("pizarra", pizarraServicio.getReferenceById(pizarra.getId()));
+            modelo.put("pizarra", pizarraServicio.getReferenceById(id));
             return "editar_pizarra.html";
         }
         List<Pizarra> ultimasPublicaciones = pizarraServicio.listarPizarras();

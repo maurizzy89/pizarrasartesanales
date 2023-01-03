@@ -83,12 +83,15 @@
                                 </div>
                             </span>
                             <a th:href="${imagen.imagenUrl}"><img class="card-img-top" th:src="${imagen.imagenUrl}" alt="pizarra"></a>
-                            <div class="text-center"><a class="btn btn-danger mt-2" th:href="@{/admin/eliminar/__${pizarra.id}__/imagen/__${imagen.id}__}">Eliminar</a></div>
+                            <div class="text-center"><a class="btn btn-danger mt-2" 
+                                 th:href="@{/admin/eliminar/__${pizarra.id}__/imagen/__${imagen.id}__}">Eliminar</a></div>
                             <div th:if="${imagen.portada == true}" >
-                                <div class="text-center"><a class="btn btn-secondary mt-2 mb-2 disabled" th:href="@{/admin/editar/__${pizarra.id}__/establecer_portada/__${imagen.id}__}">Establecer como portada</a></div>
+                                <div class="text-center"><a class="btn btn-secondary mt-2 mb-2 disabled" 
+                                th:href="@{/admin/editar/__${pizarra.id}__/establecer_portada/__${imagen.id}__}">Establecer como portada</a></div>
                             </div>
                             <div th:unless="${imagen.portada == true}">
-                                <div class="text-center"><a class="btn btn-secondary mt-2 mb-2" th:href="@{/admin/editar/__${pizarra.id}__/establecer_portada/__${imagen.id}__}">Establecer como portada</a></div>
+                                <div class="text-center"><a class="btn btn-secondary mt-2 mb-2"
+                                th:href="@{/admin/editar/__${pizarra.id}__/establecer_portada/__${imagen.id}__}">Establecer como portada</a></div>
                             </div>
                         </div>
                     </div>
