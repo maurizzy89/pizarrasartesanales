@@ -21,7 +21,7 @@
     <body class="bg-light">
         <!-- Navigation-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-        <a href="https://api.whatsapp.com/send?phone=5491127581074&text=Hola!%20queria%20consultarte%20por%20algunas%20pizarras,%20las%20medidas%20son:." class="float" target="_blank">
+        <a href="https://api.whatsapp.com/send?phone=5491127581074&text=Hola!%20queria%20consultarte%20por%20algunas%20pizarras." class="float" target="_blank">
             <i class="fa fa-whatsapp my-float"></i>
         </a>
 
@@ -93,7 +93,7 @@
 
                     </ul> 
                     <div class="redes">
-                        <a href="https://www.facebook.com/pizarrascomerciales" class="facebook" target="_blank"><i class="fa fa-facebook"></i></a>
+                        <a href="https://www.facebook.com/pizarrasdelsurartesanales" class="facebook" target="_blank"><i class="fa fa-facebook"></i></a>
                         <a href="https://www.instagram.com/pizarrascomerciales" class="instagram" target="_blank"><i class="bi bi-instagram"></i></a>
                     </div>
                 </div>
@@ -142,7 +142,9 @@
         </header>
 
         <!--        Section-->
+
         <section class="py-3">
+            <p class="px-3 m-0 bg-secondary text-light fw-bolder" th:text="${titulo}" style="text-align: right;font-family: 'Prosto One', cursive;"></p>
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
                     <div class="col mb-5" th:each="publicacion:${publicaciones}">

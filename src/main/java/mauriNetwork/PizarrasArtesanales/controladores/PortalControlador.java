@@ -41,6 +41,7 @@ public class PortalControlador {
     public String index(ModelMap modelo) {
         List<Pizarra> ultimasPublicaciones = pizarraServicio.listarPizarras();
         modelo.addAttribute("publicaciones", ultimasPublicaciones);
+        modelo.addAttribute("titulo", "TODAS LAS PIZARRAS");
         return "index.html";
     }
 
@@ -48,6 +49,7 @@ public class PortalControlador {
     public String listarMenorAMayorPrecio(ModelMap modelo) {
         List<Pizarra> pizarrasSimples = pizarraServicio.listarMenorAMayorPrecio();
         modelo.addAttribute("publicaciones", pizarrasSimples);
+        modelo.addAttribute("titulo", "MENOR A MAYOR PRECIO");
         return "index.html";
     }
 
@@ -55,6 +57,7 @@ public class PortalControlador {
     public String listarMayorAMenorPrecio(ModelMap modelo) {
         List<Pizarra> pizarrasSimples = pizarraServicio.listarMayorAMenorPrecio();
         modelo.addAttribute("publicaciones", pizarrasSimples);
+        modelo.addAttribute("titulo", "MAYOR A MENOR PRECIO");
         return "index.html";
     }
 
@@ -62,6 +65,7 @@ public class PortalControlador {
     public String listarPizarrasSimples(ModelMap modelo) {
         List<Pizarra> pizarrasSimples = pizarraServicio.listarPizarrasSimples();
         modelo.addAttribute("publicaciones", pizarrasSimples);
+        modelo.addAttribute("titulo", "PIZARRAS SIMPLES");
         return "index.html";
     }
 
@@ -69,6 +73,7 @@ public class PortalControlador {
     public String listarPizarrasDoble(ModelMap modelo) {
         List<Pizarra> pizarrasDoble = pizarraServicio.listarPizarrasDoble();
         modelo.addAttribute("publicaciones", pizarrasDoble);
+        modelo.addAttribute("titulo", "PIZARRAS DOBLE");
         return "index.html";
     }
 
@@ -76,6 +81,7 @@ public class PortalControlador {
     public String listarPizarrasEscolares(ModelMap modelo) {
         List<Pizarra> pizarrasEscolares = pizarraServicio.listarPizarrasEscolares();
         modelo.addAttribute("publicaciones", pizarrasEscolares);
+        modelo.addAttribute("titulo", "PIZARRAS ESCOLARES");
         return "index.html";
     }
 
@@ -83,6 +89,7 @@ public class PortalControlador {
     public String listarPizarrasMaceteras(ModelMap modelo) {
         List<Pizarra> pizarrasMaceteras = pizarraServicio.listarPizarrasMaceteras();
         modelo.addAttribute("publicaciones", pizarrasMaceteras);
+        modelo.addAttribute("titulo", "PIZARRAS MACETERAS");
         return "index.html";
     }
 
@@ -90,6 +97,7 @@ public class PortalControlador {
     public String listarPizarrasMadera(ModelMap modelo) {
         List<Pizarra> pizarrasMadera = pizarraServicio.listarPizarrasMadera();
         modelo.addAttribute("publicaciones", pizarrasMadera);
+        modelo.addAttribute("titulo", "CON SUPERFICIE DE MADERA");
         return "index.html";
     }
 
@@ -97,6 +105,7 @@ public class PortalControlador {
     public String listarPizarrasChapa(ModelMap modelo) {
         List<Pizarra> pizarrasChapa = pizarraServicio.listarPizarrasChapa();
         modelo.addAttribute("publicaciones", pizarrasChapa);
+        modelo.addAttribute("titulo", "CON SUPERFICIE DE CHAPA");
         return "index.html";
     }
 
@@ -104,6 +113,7 @@ public class PortalControlador {
     public String listarPizarrasChicas(ModelMap modelo) {
         List<Pizarra> pizarrasChicas = pizarraServicio.listarPizarrasChicas();
         modelo.addAttribute("publicaciones", pizarrasChicas);
+        modelo.addAttribute("titulo", "PIZARRAS CHICAS");
         return "index.html";
     }
 
@@ -111,6 +121,7 @@ public class PortalControlador {
     public String listarPizarrasMedianas(ModelMap modelo) {
         List<Pizarra> pizarrasMedianas = pizarraServicio.listarPizarrasMedianas();
         modelo.addAttribute("publicaciones", pizarrasMedianas);
+        modelo.addAttribute("titulo", "PIZARRAS MEDIANAS");
         return "index.html";
     }
 
@@ -118,6 +129,7 @@ public class PortalControlador {
     public String listarPizarrasGrandes(ModelMap modelo) {
         List<Pizarra> pizarrasGrandes = pizarraServicio.listarPizarrasGrandes();
         modelo.addAttribute("publicaciones", pizarrasGrandes);
+        modelo.addAttribute("titulo", "PIZARRAS GRANDES");
         return "index.html";
     }
 
