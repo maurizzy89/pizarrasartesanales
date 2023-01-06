@@ -21,7 +21,7 @@ public interface PizarraRepositorio extends JpaRepository<Pizarra, Long> {
     @Query("SELECT p FROM Pizarra p WHERE p.tipo='ESCOLAR' ORDER BY p.id DESC")
     public List<Pizarra> listarPizarrasEscolares();
 
-    @Query("SELECT p FROM Pizarra p WHERE p.tipo='MACETERA' ORDER BY p.id DESC")
+    @Query("SELECT p FROM Pizarra p WHERE p.tipo='MACETERO' ORDER BY p.id DESC")
     public List<Pizarra> listarPizarrasMaceteras();
 
     @Query("SELECT p FROM Pizarra p WHERE p.superficie='MADERA' ORDER BY p.id DESC")
