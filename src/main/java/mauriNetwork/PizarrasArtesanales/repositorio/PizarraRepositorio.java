@@ -12,31 +12,31 @@ public interface PizarraRepositorio extends JpaRepository<Pizarra, Long> {
     @Query("SELECT p FROM Pizarra p ORDER BY p.id DESC")
     public List<Pizarra> listarPizarras();
 
-    @Query("SELECT p FROM Pizarra p WHERE p.tipo='DOBLE' ORDER BY p.id DESC")
+    @Query("SELECT p FROM Pizarra p WHERE p.tipo='DOBLE' ORDER BY p.precio")
     public List<Pizarra> listarPizarrasDoble();
 
-    @Query("SELECT p FROM Pizarra p WHERE p.tipo='SIMPLE' ORDER BY p.id DESC")
+    @Query("SELECT p FROM Pizarra p WHERE p.tipo='SIMPLE' ORDER BY p.precio")
     public List<Pizarra> listarPizarrasSimples();
 
-    @Query("SELECT p FROM Pizarra p WHERE p.tipo='ESCOLAR' ORDER BY p.id DESC")
+    @Query("SELECT p FROM Pizarra p WHERE p.tipo='ESCOLAR' ORDER BY p.precio")
     public List<Pizarra> listarPizarrasEscolares();
 
-    @Query("SELECT p FROM Pizarra p WHERE p.tipo='MACETERO' ORDER BY p.id DESC")
+    @Query("SELECT p FROM Pizarra p WHERE p.tipo='MACETERO' ORDER BY p.precio")
     public List<Pizarra> listarPizarrasMaceteras();
 
-    @Query("SELECT p FROM Pizarra p WHERE p.superficie='MADERA' ORDER BY p.id DESC")
+    @Query("SELECT p FROM Pizarra p WHERE p.superficie='MADERA' ORDER BY p.precio")
     public List<Pizarra> listarPizarrasMadera();
 
-    @Query("SELECT p FROM Pizarra p WHERE p.superficie='CHAPA' ORDER BY p.id DESC")
+    @Query("SELECT p FROM Pizarra p WHERE p.superficie='CHAPA' ORDER BY p.precio")
     public List<Pizarra> listarPizarrasChapa();
 
-    @Query("SELECT p FROM Pizarra p WHERE p.tamanio='CHICO' ORDER BY p.id DESC")
+    @Query("SELECT p FROM Pizarra p WHERE p.tamanio='CHICO' ORDER BY p.precio")
     public List<Pizarra> listarPizarrasChicas();
 
-    @Query("SELECT p FROM Pizarra p WHERE p.tamanio='MEDIANO' ORDER BY p.id DESC")
+    @Query("SELECT p FROM Pizarra p WHERE p.tamanio='MEDIANO' ORDER BY p.precio")
     public List<Pizarra> listarPizarrasMedianas();
 
-    @Query("SELECT p FROM Pizarra p WHERE p.tamanio='GRANDE' ORDER BY p.id DESC")
+    @Query("SELECT p FROM Pizarra p WHERE p.tamanio='GRANDE' ORDER BY p.precio")
     public List<Pizarra> listarPizarrasGrandes();
 
     @Query("SELECT p FROM Pizarra p ORDER BY p.precio")

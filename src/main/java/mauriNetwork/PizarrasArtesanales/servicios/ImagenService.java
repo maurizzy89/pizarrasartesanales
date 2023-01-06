@@ -51,6 +51,7 @@ public class ImagenService {
 //        }
 //        return urlNueva;
 //    }
+    
     public void modificarPortada(Long id, int idInt) {
         Pizarra pizarra = pizarraServicio.getReferenceById(id);
         List<Imagen> imagenes = pizarra.getImagenes();

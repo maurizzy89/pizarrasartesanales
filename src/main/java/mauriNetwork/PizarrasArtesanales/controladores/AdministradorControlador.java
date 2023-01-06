@@ -41,6 +41,7 @@ public class AdministradorControlador {
     public String index(ModelMap modelo) {
         List<Pizarra> ultimasPublicaciones = pizarraServicio.listarPizarras();
         modelo.addAttribute("publicaciones", ultimasPublicaciones);
+        modelo.addAttribute("titulo", "TODAS LAS PIZARRAS");
         return "index.html";
     }
 
@@ -86,6 +87,7 @@ public class AdministradorControlador {
         }
         List<Pizarra> ultimasPublicaciones = pizarraServicio.listarPizarras();
         modelo.addAttribute("publicaciones", ultimasPublicaciones);
+        modelo.addAttribute("titulo", "TODAS LAS PIZARRAS");
         return "index.html";
     }
 
@@ -157,15 +159,32 @@ public class AdministradorControlador {
                 imagenService.save(imagen);
                 imagenes.add(imagen);
             }
-            pizarraServicio.editarPizarra(id, alto, ancho, tamanio, tipo, superficie, precio, descripcion);
+
+            int cont = 0;
+            if (!imagenes.isEmpty()) {
+                for (Imagen imagen : imagenes) {
+                    if (!imagen.isPortada()) {
+                        cont++;
+                    }
+                }
+                if (imagenes.size() == cont) {
+                    imagenes.get(0).setPortada(true);
+                    System.out.println(imagenes.size());
+                    System.out.println(cont);
+                }
+            }
+            
+            pizarraServicio.editarPizarra(id, alto, ancho, tamanio, tipo, superficie, imagenes, precio, descripcion);
             modelo.put("exito", "La pizarra se edito correctamente");
         } catch (MyException ex) {
             modelo.put("error", ex.getMessage());
             modelo.put("pizarra", pizarraServicio.getReferenceById(id));
             return "editar_pizarra.html";
         }
+
         List<Pizarra> ultimasPublicaciones = pizarraServicio.listarPizarras();
         modelo.addAttribute("publicaciones", ultimasPublicaciones);
+        modelo.addAttribute("titulo", "TODAS LAS PIZARRAS");
         return "index.html";
     }
 }

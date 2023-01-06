@@ -40,7 +40,7 @@ public class PizarraServicio {
     }
 
     @Transactional
-    public void editarPizarra(Long id, Integer alto, Integer ancho, String tamanio, String tipo, String superficie, Integer precio, String descripcion) throws MyException {
+    public void editarPizarra(Long id, Integer alto, Integer ancho, String tamanio, String tipo, String superficie, List<Imagen> imagenes, Integer precio, String descripcion) throws MyException {
         validar(alto, ancho, tamanio, tipo, superficie, precio, descripcion);
 
         Optional<Pizarra> respuestaPublicacion = pizarraRepositorio.findById(id);
@@ -53,6 +53,7 @@ public class PizarraServicio {
             publicacion.setTamanio(tamanio);
             publicacion.setTipo(tipo);
             publicacion.setSuperficie(superficie);
+            publicacion.setImagenes(imagenes);
             publicacion.setPrecio(precio);
             publicacion.setDescripcion(descripcion);
 
