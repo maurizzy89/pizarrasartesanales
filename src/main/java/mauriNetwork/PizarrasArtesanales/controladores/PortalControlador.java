@@ -69,7 +69,7 @@ public class PortalControlador {
         return "index.html";
     }
 
-    @GetMapping("/pizarras_doble")
+    @GetMapping("/pizarras_dobles")
     public String listarPizarrasDoble(ModelMap modelo) {
         List<Pizarra> pizarrasDoble = pizarraServicio.listarPizarrasDoble();
         modelo.addAttribute("publicaciones", pizarrasDoble);
