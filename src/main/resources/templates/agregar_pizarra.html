@@ -1,107 +1,93 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
         <title>Pizarras Artesanales - Agregar Pizarra</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link rel="stylesheet" href="/css/styles.css" />
-        <link rel="stylesheet" href="/css/styles2.css" />
-    </head>
+    <div th:replace="fragments/head.html"></div>
+</head>
 
-    <body class="bg-light">
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="container px-1 px-lg-5">
-                <a class="navbar-brand" href="/"><img src="/images/pizarrasLogo.png" style="width: 200px"></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Inicio</a></li>
-                    </ul>
+<body class="bg-light">
+    <div th:replace="fragments/whatsappButton.html"></div>
+
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container px-1 px-lg-5">
+            <a class="navbar-brand" href="/"><img src="/images/pizarrasLogo.png" style="width: 200px"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Inicio</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <form th:action="@{/admin/agregado}" method="POST" align="center" enctype="multipart/form-data" th:object="${pizarra}">
+        <input type="hidden" name="id" th:field="*{id}">
+
+        <div class="form-group my-3">
+            <p>Agregar Pizarra</p>
+        </div>
+        <div align="center" class="form-group my-3">
+            <input type="number" class="form-control" placeholder="Alto" name="alto" style="width: 25%" th:field="*{alto}">
+            X
+            <input type="number" class="form-control" placeholder="Ancho" name="ancho" style="width: 25%" th:field="*{ancho}">
+        </div>
+        <div align="center" class="form-group my-3">
+            <select class="form-control" style="width: 60%" name="tamanio">
+                <option disabled selected>Elegir tamaño</option>
+                <option>CHICO</option>
+                <option>MEDIANO</option>
+                <option>GRANDE</option>
+            </select>
+        </div>
+        <div align="center" class="form-group my-3">
+            <select class="form-control" style="width: 60%" name="tipo" >
+                <option disabled selected>Elegir tipo</option>
+                <option>SIMPLE</option>
+                <option>DOBLE</option>
+                <option>ESCOLAR</option>
+                <option>MACETERO</option>
+            </select>
+        </div>
+        <div align="center" class="form-group my-3">
+            <select class="form-control" style="width: 60%" name="superficie">
+                <option disabled selected>Tipo de superficie</option>
+                <option>MADERA</option>
+                <option>CHAPA</option>
+            </select>
+        </div>
+        <div align="center" class="form-group my-3">
+            <input type="number" class="form-control" placeholder="Precio" name="precio" style="width: 60%" th:field="*{precio}">
+        </div>
+        <div align="center" class="form-group my-3">
+            <input type="text" class="form-control" placeholder="Descripcion" name="descripcion" style="width: 60%" th:field="*{descripcion}">
+        </div>
+        <div id="div_file">
+            <p id="texto">Subir Imagenes</p>
+            <input type="file"  id="btn_enviar" name="multipartFiles" multiple>
+        </div>
+
+        <button type="submit" name="agregar" class="btn btn-dark" style="width: 60%; margin-bottom: 10px;">Agregar</button>
+
+        <div align="center">
+            <div th:if="${error != null}" class="card text-white bg-danger m-2 mensajeError" style="width: 60%">
+                <div class="card-body" >
+                    <h5 class="card-title">Error</h5>
+                    <p class="card-text" th:text="${error}"></p>
                 </div>
             </div>
-        </nav>
+        </div>
+    </form>
 
-        <!-- Section-->
-        <form th:action="@{/admin/agregado}" method="POST" align="center" enctype="multipart/form-data" th:object="${pizarra}">
-            <input type="hidden" name="id" th:field="*{id}">
 
-            <div class="form-group my-3">
-                <p>Agregar Pizarra</p>
-            </div>
-            <div align="center" class="form-group my-3">
-                <input type="number" class="form-control" placeholder="Alto" name="alto" style="width: 25%" th:field="*{alto}">
-                X
-                <input type="number" class="form-control" placeholder="Ancho" name="ancho" style="width: 25%" th:field="*{ancho}">
-            </div>
-            <div align="center" class="form-group my-3">
-                <select class="form-control" style="width: 60%" name="tamanio">
-                    <option disabled selected>Elegir tamaño</option>
-                    <option>CHICO</option>
-                    <option>MEDIANO</option>
-                    <option>GRANDE</option>
-                </select>
-            </div>
-            <div align="center" class="form-group my-3">
-                <select class="form-control" style="width: 60%" name="tipo" >
-                    <option disabled selected>Elegir tipo</option>
-                    <option>SIMPLE</option>
-                    <option>DOBLE</option>
-                    <option>ESCOLAR</option>
-                    <option>MACETERO</option>
-                </select>
-            </div>
-            <div align="center" class="form-group my-3">
-                <select class="form-control" style="width: 60%" name="superficie">
-                    <option disabled selected>Tipo de superficie</option>
-                    <option>MADERA</option>
-                    <option>CHAPA</option>
-                </select>
-            </div>
-            <div align="center" class="form-group my-3">
-                <input type="number" class="form-control" placeholder="Precio" name="precio" style="width: 60%" th:field="*{precio}">
-            </div>
-            <div align="center" class="form-group my-3">
-                <input type="text" class="form-control" placeholder="Descripcion" name="descripcion" style="width: 60%" th:field="*{descripcion}">
-            </div>
-            <div id="div_file">
-                <p id="texto">Subir Imagenes</p>
-                <input type="file"  id="btn_enviar" name="multipartFiles" multiple>
-            </div>
+    <footer class="py-5 bg-dark" style="position:relative;width:100%;bottom:0">
+        <div th:replace="fragments/footer.html"></div>
+    </footer>
 
-            <button type="submit" name="agregar" class="btn btn-dark" style="width: 60%; margin-bottom: 10px;">Agregar</button>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
-            <div align="center">
-                <div th:if="${error != null}" class="card text-white bg-danger m-2 mensajeError" style="width: 60%">
-                    <div class="card-body" >
-                        <h5 class="card-title">Error</h5>
-                        <p class="card-text" th:text="${error}"></p>
-                    </div>
-                </div>
-            </div>
-        </form>
-
-        <!-- Footer-->
-        <footer class="py-5 bg-dark" style="position:relative;width:100%;bottom:0">
-            <div class="container"><p class="m-0 text-center text-white">
-                    <script>
-                        var fecha = new Date();
-                        document.write("Copyright • Todos los derechos reservados • "+ (fecha.getYear()+1900));
-                    </script>
-                </p></div>
-        </footer>
-
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+</body>
 </html>

@@ -1,76 +1,62 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
         <title>Pizarras Artesanales - Ver Pizarra</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link rel="stylesheet" href="/css/styles.css" />
-        <link rel="stylesheet" href="/css/styles2.css" />
-    </head>
-    <body class="bg-light">
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="container px-1 px-lg-5">
-                <a class="navbar-brand" href="/"><img src="/images/pizarrasLogo.png" style="width: 200px"></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Inicio</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+    <div th:replace="fragments/head.html"></div>
+</head>
+<body class="bg-light">
+    <div th:replace="fragments/whatsappButton.html"></div>
 
-        <!-- Section-->
-        <section>
-            <div class="row m-4 row-cols-xl-3 justify-content-center">
-                <div class="col mb-1 px-1" th:each="imagen:${pizarra.imagenes}">
-                    <div class="card h-10">
-                        <div>
-                            <span sec:authorize="hasAnyRole('ADMIN')">
-                                <div th:if="${imagen.portada == true}" >
-                                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Portada</div>
-                                </div>
-                            </span>
-                            <a th:href="${imagen.imagenUrl}"><img class="card-img-top" th:src="${imagen.imagenUrl}" alt="pizarra"></a>
-                        </div>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container px-1 px-lg-5">
+            <a class="navbar-brand" href="/"><img src="/images/pizarrasLogo.png" style="width: 200px"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Inicio</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section-->
+    <section>
+        <div class="row m-4 row-cols-xl-3 justify-content-center">
+            <div class="col mb-1 px-1" th:each="imagen:${pizarra.imagenes}">
+                <div class="card h-10">
+                    <div>
+                        <span sec:authorize="hasAnyRole('ADMIN')">
+                            <div th:if="${imagen.portada == true}" >
+                                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Portada</div>
+                            </div>
+                        </span>
+                        <a th:href="${imagen.imagenUrl}"><img class="card-img-top" th:src="${imagen.imagenUrl}" alt="pizarra"></a>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="text-center py-3">
-                <h6 class="fw-bolder text-info" th:text=' ${pizarra.tamanio}'></h6>
-                <h6 class="fw-bolder" th:text="${pizarra.alto} +' x ' + ${pizarra.ancho}"></h6>
-                <h6 class="fw-bolder" th:text="'Tipo: ' + ${pizarra.tipo}"></h6>
-                <h6 class="fw-bolder" th:text="'Superficie: ' + ${pizarra.superficie}"></h6>
-                <p class="fw-bolder text-success" th:text="${pizarra.descripcion}" style='font-size: 15px'></p>
+        <div class="text-center py-3">
+            <h6 class="fw-bolder text-info" th:text=' ${pizarra.tamanio}'></h6>
+            <h6 class="fw-bolder" th:text="${pizarra.alto} +' x ' + ${pizarra.ancho}"></h6>
+            <h6 class="fw-bolder" th:text="'Tipo: ' + ${pizarra.tipo}"></h6>
+            <h6 class="fw-bolder" th:text="'Superficie: ' + ${pizarra.superficie}"></h6>
+            <p class="fw-bolder text-success" th:text="${pizarra.descripcion}" style='font-size: 15px'></p>
 
-            </div>
+        </div>
 
 
-        </section>
+    </section>
 
-        <!-- Footer-->
-        <footer class="py-5 bg-dark" style="position:relative;width:100%;bottom:0">
-            <div class="container"><p class="m-0 text-center text-white">
-                    <script>
-                        var fecha = new Date();
-                        document.write("Copyright • Todos los derechos reservados • "+ (fecha.getYear()+1900));
-                    </script>
-                </p></div>
-        </footer>
+    <!-- Footer-->
+    <footer class="py-5 bg-dark" style="position:relative;width:100%;bottom:0">
+        <div th:replace="fragments/footer.html"></div>
+    </footer>
 
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+</body>
 </html>
