@@ -149,7 +149,6 @@
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
                     <div class="col mb-5" th:each="publicacion:${publicaciones}">
                         <div class="card h-100">
-                            <div class="bg-light text-dark fw-bolder" style="position: absolute;font-size:20px;font-family: serif ;  top: 0.5rem; right: 0.5rem; text-align: right; border-radius: 5px" th:text="'$' + ${publicacion.precio}"></div>
                             <a th:href="@{/pizarra/__${publicacion.id}__}" style="text-decoration: none">
                                 <div th:each="imagen:${publicacion.imagenes}">
                                     <div th:if="${imagen.portada == true}">
@@ -168,6 +167,7 @@
                                     <span th:if="${publicacion.superficie == 'CHAPA'}">
                                         <p class="bg-info text-light fw-bolder" th:text="'Superficie de ' + ${publicacion.superficie}" style='font-size: 12px; margin:4px;'></p>
                                     </span>
+                                    <h6 class="px-1 bg-white text-dark fw-bolder" style="position: absolute;font-size:20px; top: 0.5rem; right: 0.5rem; text-align: right; border-radius: 5px" th:text="'$' + ${publicacion.precio}"></h6>
                                 </div>
                             </div>
                             <div class="card-footer pt-0 border-top-0 bg-transparent">
