@@ -146,7 +146,7 @@
                                 <h6 class="fw-bolder" th:text="${publicacion.alto} +' x ' + ${publicacion.ancho}"></h6>
                                 <p class="fw-bolder" th:text="${publicacion.tipo}" style='font-size: 12px; margin:4px;'></p>
 
-                                <h6 class="m-2 p-1 bg-warning text-white fw-bolder" style="font-size:15px;  text-align: center; border-radius: 15px" th:text="'Precio unitario $' + ${#numbers.formatDecimal(publicacion.precio * 1.1,0,0,'COMMA')}"></h6>
+                                <h6 class="m-2 p-1 bg-warning text-white fw-bolder" style="font-size:15px;  text-align: center; border-radius: 15px" th:text="'Precio $' + ${#numbers.formatDecimal(publicacion.precio * 1.1,0,0,'COMMA')}"></h6>
                                 <h6 class="m-2 p-1 bg-success text-white fw-bolder" style="font-size:15px;  text-align: center; border-radius: 15px" th:text="'Pago en efectivo $' + ${publicacion.precio}"></h6>
                             </div>
                         </div>
