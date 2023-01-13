@@ -23,7 +23,6 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Todas las Pizarras</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" data-bs-auto-close="outside">Filtrar Pizarras</a>
                         <ul class="dropdown-menu">
@@ -146,7 +145,7 @@
                                 <h6 class="fw-bolder" th:text="${publicacion.alto} +' x ' + ${publicacion.ancho}"></h6>
                                 <p class="fw-bolder" th:text="${publicacion.tipo}" style='font-size: 12px; margin:4px;'></p>
 
-                                <h6 class="m-2 p-1 bg-warning text-white fw-bolder" style="font-size:15px;  text-align: center; border-radius: 15px" th:text="'Precio $' + ${#numbers.formatDecimal(publicacion.precio * 1.1,0,0,'COMMA')}"></h6>
+                                <h6 class="m-2 p-1 bg-danger text-white fw-bolder" style="font-size:15px;  text-align: center; border-radius: 15px" th:text="'Precio $' + ${#numbers.formatDecimal(publicacion.precio * 1.1,0,0,'COMMA')}"></h6>
                                 <h6 class="m-2 p-1 bg-success text-white fw-bolder" style="font-size:15px;  text-align: center; border-radius: 15px" th:text="'Pago en efectivo $' + ${publicacion.precio}"></h6>
                             </div>
                         </div>

@@ -38,14 +38,6 @@ public class PortalControlador {
     }
 
     @GetMapping("/")
-    public String index(ModelMap modelo) {
-        List<Pizarra> ultimasPublicaciones = pizarraServicio.listarPizarras();
-        modelo.addAttribute("publicaciones", ultimasPublicaciones);
-        modelo.addAttribute("titulo", "TODAS LAS PIZARRAS");
-        return "index.html";
-    }
-
-    @GetMapping("/pizarras_menor_a_mayor_precio")
     public String listarMenorAMayorPrecio(ModelMap modelo) {
         List<Pizarra> pizarrasSimples = pizarraServicio.listarMenorAMayorPrecio();
         modelo.addAttribute("publicaciones", pizarrasSimples);
